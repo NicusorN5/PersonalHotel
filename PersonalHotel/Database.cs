@@ -1,10 +1,5 @@
-﻿using Microsoft.Data.Sqlite;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//using Oracle.ManagedDataAccess.Client;
+using MySql.Data.MySqlClient;
 
 namespace PersonalHotel
 {
@@ -14,38 +9,88 @@ namespace PersonalHotel
 		public object Value;
 	}
 
-	internal class Database
+	internal class Database : IDisposable
 	{
-		static SqliteConnection _conn;
+		//OracleConnection _conn;
+		MySqlConnection _conn;
+		bool _disposed = false;
 
 		public Database()
 		{
-			_conn = new SqliteConnection("Data Source=hotel.db");
-			if (_conn == null) throw new Exception("Database initialization failed!");
-			
+			/*	
+			OracleConnectionStringBuilder connStr = new();
+			connStr.UserID = "hotel_admin";
+			connStr.Password = "hotel1234";
+			connStr.DataSource = "localhost:1521/xe";
+			//connStr.ConnectionTimeout = 1500;
+			//connStr.MinPoolSize = 0;
+			//connStr.MaxPoolSize = 100;
+
+			//"Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=MyOracleSID)));User Id=hotel_admin;Password=hotel1234;"
+
+			_conn = new OracleConnection("Data Source=172.20.1.39/Ora09;User Id=hr;Password=oracletest;");
+			_conn.Open();
+			 */
+
+			MySqlConnectionStringBuilder connStr = new();
+			connStr.UserID = "hotel";
+			connStr.Password = "hotel1234";
+			connStr.Database = "hotel";
+			connStr.Server = "localhost";
+
+			_conn = new MySqlConnection(connStr.ConnectionString);
 			_conn.Open();
 		}
 
-		public SqliteDataReader Execute(string query, params KeyValuePair[] objects)
+		public MySqlDataReader Execute(string query, params KeyValuePair[] objects)
 		{
-			SqliteCommand cmd = _conn.CreateCommand();
+			//SqliteCommand cmd = _conn.CreateCommand();
+			//cmd.CommandText = query;
+			MySqlCommand cmd = _conn.CreateCommand();
 			cmd.CommandText = query;
 
 			foreach(KeyValuePair pair in objects)
 			{
+				//cmd.Parameters.AddWithValue(pair.Name, pair.Value);
 				cmd.Parameters.AddWithValue(pair.Name, pair.Value);
 			}
 
+			//return cmd.ExecuteReader();
 			return cmd.ExecuteReader();
 		}
 
 
 		public void Execute(string query)
 		{
-			SqliteCommand cmd = _conn.CreateCommand();
+			MySqlCommand cmd = _conn.CreateCommand();
 			cmd.CommandText = query;
 
 			cmd.ExecuteNonQuery();
+
+			//SqliteCommand cmd = _conn.CreateCommand();
+			//cmd.CommandText = query;
+
+			//cmd.ExecuteNonQuery();
+		}
+
+		public void Dispose()
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		~Database() 
+		{
+			_conn.Close();
+			Dispose(false); 
+		}
+
+		private void Dispose(bool disposing)
+		{
+			if (_disposed) return;
+
+			if (disposing) _conn.Dispose();
+			_disposed = true;
 		}
 	}
 }
