@@ -27,6 +27,10 @@
 		}
 
 		Employee? _result = null;
+		public Employee? Employee
+		{
+			get => _result;
+		}
 
 		private void button1_Click(object sender, EventArgs e)
 		{

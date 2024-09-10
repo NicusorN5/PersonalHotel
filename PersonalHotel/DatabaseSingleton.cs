@@ -6,10 +6,7 @@
 
 		public Database Get()
 		{
-			if (_db == null)
-			{
-				_db = new();
-			}
+			if (_db == null) _db = new();
 			return _db;
 		}
  	}

@@ -23,7 +23,7 @@
 		}
 
 		Job? _result;
-		public Job? ReturnedJob
+		public Job? Job
 		{
 			get => _result;
 		}

@@ -1,6 +1,6 @@
 ﻿namespace PersonalHotel
 {
-	class Job
+	class Job : ITable
 	{
 		public int ID { get; private set; }
 		public string Title { get; private set; }
@@ -9,11 +9,18 @@
 
 		Database _db;
 
-		public Job(Database db, string title, uint minSalary, uint maxSalary)
+		public Job(Database db, int id, string title,  uint minSalary, uint maxSalary) : base(db)
 		{
-			if (db == null) throw new ArgumentNullException("db");
-			else _db = db;
+			if (title.Length > 50) throw new ArgumentException("Title cannot be longer than 50 characters, since this is a table limitation");
 
+			ID = id;
+			Title = title;
+			MinSalary = minSalary;
+			MaxSalary = maxSalary;
+		}
+
+		public Job(Database db, string title, uint minSalary, uint maxSalary) : base(db)
+		{
 			if (title.Length > 50) throw new ArgumentException("Title cannot be longer than 50 characters, since this is a table limitation");
 
 			Title = title;
@@ -37,12 +44,9 @@
 		}
 
 
-		public Job(Database db, int id)
+		public Job(Database db, int id) : base(db)
 		{
 			ID = id;
-
-			if (db == null) throw new ArgumentNullException("db");
-			else _db = db;
 
 			using (var r = db.Execute("SELECT * FROM jobs WHERE job_id = @id", new KeyValuePair("@id", id)))
 			{
@@ -56,7 +60,7 @@
 			}
 		}
 
-		public void Update()
+		public override void Update()
 		{
 			_db.ExecuteNQ("UPDATE jobs SET title = @pTitle, min_salary = @pMinSalary, max_salary = @pMaxSalary WHERE job_id = @id",
 				new KeyValuePair("@pTitle", Title),
@@ -66,7 +70,7 @@
 			);
 		}
 
-		public void Remove()
+		public override void Remove()
 		{
 			_db.ExecuteNQ("DELETE FROM jobs WHERE job_id = @id", new KeyValuePair("@id", ID));
 

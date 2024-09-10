@@ -2,6 +2,22 @@
 {
 	internal class Employee : ITable
 	{
+		public Employee(Database db, int id, string firstName, string lastName, DateTime birth, uint salary, string phone, string email) : base(db)
+		{
+			if (firstName.Length > 50) throw new ArgumentException("First name must be shorter than 50 characters");
+			if (lastName.Length > 50) throw new ArgumentException("Last name must be shorter than 50 characters");
+			if (phone.Length > 50) throw new ArgumentException("Phone number must be shorter than 50 characters");
+			if (email.Length > 100) throw new ArgumentException("Email address must be shorter than 100 characters");
+
+			ID = id;
+			FirstName = firstName;
+			LastName = lastName;
+			BirthDate = birth;
+			Salary = salary;
+			Phone = phone;
+			Email = email;
+		}
+
 		public Employee(Database db, string firstName, string lastName, DateTime birth, uint salary, string phone, string email) : base(db)
 		{
 			if (firstName.Length > 50) throw new ArgumentException("First name must be shorter than 50 characters");

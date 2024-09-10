@@ -6,15 +6,35 @@ using System.Threading.Tasks;
 
 namespace PersonalHotel
 {
-	class JobEntry : ITable
+	internal class JobEntry : ITable
 	{
-		public JobEntry(Database db, Employee employee, Job job, DateTime start, DateTime? end) : base(db)
+		public JobEntry(Database db, int ID, int employeeID, int jobID, DateTime start, DateTime? end) : base(db)
 		{
+			this.ID = ID;
+			EmployeeID = employeeID;
+			JobID = jobID;
+			Start = start;
+			End = end;
+		}
+
+		public JobEntry(Database db, int ID, Employee employee, Job job, DateTime start, DateTime? end) : this(db, ID ,employee.ID, job.ID, start, end)
+		{
+			//Calls 1st ctor
 			if (employee == null) throw new ArgumentNullException("employee");
 			if (job == null) throw new ArgumentNullException("job");
+		}
 
-			EmployeeID = employee.ID;
-			JobID = job.ID;
+		public JobEntry(Database db, Employee employee, Job job, DateTime start, DateTime? end) : this(db, employee.ID, job.ID, start, end)
+		{
+			//Calls 4th ctor
+			if (employee == null) throw new ArgumentNullException("employee");
+			if (job == null) throw new ArgumentNullException("job");
+		}
+
+		public JobEntry(Database db, int employeeID, int jobID, DateTime start, DateTime? end) : base(db)
+		{
+			EmployeeID = employeeID;
+			JobID = jobID;
 			Start = start;
 			End = end;
 
