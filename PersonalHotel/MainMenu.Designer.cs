@@ -49,6 +49,7 @@
 			newEmployeeToolStripMenuItem = new ToolStripMenuItem();
 			newJobTitleToolStripMenuItem = new ToolStripMenuItem();
 			changeEmployeeTitleToolStripMenuItem = new ToolStripMenuItem();
+			button1 = new Button();
 			tabControl.SuspendLayout();
 			EmployeesPage.SuspendLayout();
 			menuStrip1.SuspendLayout();
@@ -67,6 +68,7 @@
 			// 
 			// EmployeesPage
 			// 
+			EmployeesPage.Controls.Add(button1);
 			EmployeesPage.Controls.Add(deleteEmployeeBtn);
 			EmployeesPage.Controls.Add(editEmployeeBtn);
 			EmployeesPage.Controls.Add(newEmployeeBtn);
@@ -217,6 +219,15 @@
 			changeEmployeeTitleToolStripMenuItem.Text = "Change employee title";
 			changeEmployeeTitleToolStripMenuItem.Click += changeEmployeeTitleToolStripMenuItem_Click;
 			// 
+			// button1
+			// 
+			button1.Location = new Point(614, 64);
+			button1.Name = "button1";
+			button1.Size = new Size(146, 23);
+			button1.TabIndex = 4;
+			button1.Text = "Refresh list";
+			button1.UseVisualStyleBackColor = true;
+			// 
 			// MainMenu
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
@@ -263,5 +274,6 @@
 		private ColumnHeader columnHeader4;
 		private ColumnHeader columnHeader5;
 		private ColumnHeader columnHeader6;
+		private Button button1;
 	}
 }

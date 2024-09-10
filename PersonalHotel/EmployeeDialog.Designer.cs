@@ -29,17 +29,17 @@
 		private void InitializeComponent()
 		{
 			label1 = new Label();
-			textBox1 = new TextBox();
-			textBox2 = new TextBox();
+			tbFirstName = new TextBox();
+			tbLastName = new TextBox();
 			label2 = new Label();
 			monthCalendar1 = new MonthCalendar();
 			label3 = new Label();
 			label4 = new Label();
 			numericUpDown1 = new NumericUpDown();
 			label5 = new Label();
-			textBox3 = new TextBox();
+			tbPhone = new TextBox();
 			label6 = new Label();
-			textBox4 = new TextBox();
+			tbEmail = new TextBox();
 			button1 = new Button();
 			button2 = new Button();
 			((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
@@ -54,19 +54,19 @@
 			label1.TabIndex = 0;
 			label1.Text = "First name";
 			// 
-			// textBox1
+			// tbFirstName
 			// 
-			textBox1.Location = new Point(80, 6);
-			textBox1.Name = "textBox1";
-			textBox1.Size = new Size(197, 23);
-			textBox1.TabIndex = 1;
+			tbFirstName.Location = new Point(80, 6);
+			tbFirstName.Name = "tbFirstName";
+			tbFirstName.Size = new Size(197, 23);
+			tbFirstName.TabIndex = 1;
 			// 
-			// textBox2
+			// tbLastName
 			// 
-			textBox2.Location = new Point(80, 35);
-			textBox2.Name = "textBox2";
-			textBox2.Size = new Size(197, 23);
-			textBox2.TabIndex = 2;
+			tbLastName.Location = new Point(80, 35);
+			tbLastName.Name = "tbLastName";
+			tbLastName.Size = new Size(197, 23);
+			tbLastName.TabIndex = 2;
 			// 
 			// label2
 			// 
@@ -80,6 +80,7 @@
 			// monthCalendar1
 			// 
 			monthCalendar1.Location = new Point(18, 91);
+			monthCalendar1.MaxSelectionCount = 1;
 			monthCalendar1.Name = "monthCalendar1";
 			monthCalendar1.TabIndex = 4;
 			// 
@@ -118,12 +119,12 @@
 			label5.TabIndex = 8;
 			label5.Text = "Phone";
 			// 
-			// textBox3
+			// tbPhone
 			// 
-			textBox3.Location = new Point(59, 288);
-			textBox3.Name = "textBox3";
-			textBox3.Size = new Size(218, 23);
-			textBox3.TabIndex = 9;
+			tbPhone.Location = new Point(59, 288);
+			tbPhone.Name = "tbPhone";
+			tbPhone.Size = new Size(218, 23);
+			tbPhone.TabIndex = 9;
 			// 
 			// label6
 			// 
@@ -134,12 +135,12 @@
 			label6.TabIndex = 10;
 			label6.Text = "E-mail";
 			// 
-			// textBox4
+			// tbEmail
 			// 
-			textBox4.Location = new Point(59, 317);
-			textBox4.Name = "textBox4";
-			textBox4.Size = new Size(218, 23);
-			textBox4.TabIndex = 11;
+			tbEmail.Location = new Point(59, 317);
+			tbEmail.Name = "tbEmail";
+			tbEmail.Size = new Size(218, 23);
+			tbEmail.TabIndex = 11;
 			// 
 			// button1
 			// 
@@ -159,6 +160,7 @@
 			button2.TabIndex = 13;
 			button2.Text = "Cancel";
 			button2.UseVisualStyleBackColor = true;
+			button2.Click += button2_Click;
 			// 
 			// EmployeeDialog
 			// 
@@ -167,17 +169,17 @@
 			ClientSize = new Size(300, 386);
 			Controls.Add(button2);
 			Controls.Add(button1);
-			Controls.Add(textBox4);
+			Controls.Add(tbEmail);
 			Controls.Add(label6);
-			Controls.Add(textBox3);
+			Controls.Add(tbPhone);
 			Controls.Add(label5);
 			Controls.Add(numericUpDown1);
 			Controls.Add(label4);
 			Controls.Add(label3);
 			Controls.Add(monthCalendar1);
 			Controls.Add(label2);
-			Controls.Add(textBox2);
-			Controls.Add(textBox1);
+			Controls.Add(tbLastName);
+			Controls.Add(tbFirstName);
 			Controls.Add(label1);
 			Name = "EmployeeDialog";
 			Text = "Add new employee";
@@ -189,17 +191,17 @@
 		#endregion
 
 		private Label label1;
-		private TextBox textBox1;
-		private TextBox textBox2;
+		private TextBox tbFirstName;
+		private TextBox tbLastName;
 		private Label label2;
 		private MonthCalendar monthCalendar1;
 		private Label label3;
 		private Label label4;
 		private NumericUpDown numericUpDown1;
 		private Label label5;
-		private TextBox textBox3;
+		private TextBox tbPhone;
 		private Label label6;
-		private TextBox textBox4;
+		private TextBox tbEmail;
 		private Button button1;
 		private Button button2;
 	}
