@@ -7,6 +7,12 @@ namespace PersonalHotel
 	{
 		public string Name;
 		public object Value;
+
+		public KeyValuePair(string name, object value)
+		{
+			Name = name;
+			Value = value;
+		}
 	}
 
 	internal class Database : IDisposable
@@ -60,17 +66,39 @@ namespace PersonalHotel
 		}
 
 
-		public void Execute(string query)
+		public MySqlDataReader Execute(string query)
 		{
 			MySqlCommand cmd = _conn.CreateCommand();
 			cmd.CommandText = query;
 
-			cmd.ExecuteNonQuery();
+			return cmd.ExecuteReader();
 
 			//SqliteCommand cmd = _conn.CreateCommand();
 			//cmd.CommandText = query;
 
 			//cmd.ExecuteNonQuery();
+		}
+
+		public int ExecuteNQ(string query, params KeyValuePair[] objects)
+		{
+			MySqlCommand cmd = _conn.CreateCommand();
+			cmd.CommandText = query;
+
+			foreach (KeyValuePair pair in objects)
+			{
+				//cmd.Parameters.AddWithValue(pair.Name, pair.Value);
+				cmd.Parameters.AddWithValue(pair.Name, pair.Value);
+			}
+
+			return cmd.ExecuteNonQuery();
+		}
+
+		public int ExecuteNQ(string query)
+		{
+			MySqlCommand cmd = _conn.CreateCommand();
+			cmd.CommandText = query;
+
+			return cmd.ExecuteNonQuery();
 		}
 
 		public void Dispose()
