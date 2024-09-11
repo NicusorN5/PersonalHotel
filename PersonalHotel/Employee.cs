@@ -44,6 +44,7 @@
 				))
 			{
 				if (r == null) throw new Exception("Failed to create employee in database");
+				r.Read();
 
 				ID = r.GetInt32(0);
 
@@ -58,6 +59,7 @@
 			using (var r = db.Execute("SELECT * FROM employees WHERE id = @pID", new KeyValuePair("@pID", id)))
 			{
 				if (r == null) throw new Exception("Employee retrieval failed.");
+				r.Read();
 
 				FirstName = r.GetString(1);
 				LastName = r.GetString(2);
@@ -81,12 +83,12 @@
 		public override void Update()
 		{
 			_db.ExecuteNQ("UPDATE employees SET " +
-				"first_name = @pFirstName," +
+				" first_name = @pFirstName," +
 				" last_name = @pLastName," +
 				" birth_date = @pBirth," +
 				" salary = @pSalary," +
 				" phone = @pPhone," +
-				" email = pEmail" +
+				" email = @pEmail" +
 				" WHERE id = @pID",
 				new KeyValuePair("@pFirstName", FirstName),
 				new KeyValuePair("@pLastName", LastName),

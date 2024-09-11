@@ -32,14 +32,24 @@
 		{
 			if (_result == null)
 			{
-					_result = new Job(
-						_db,
-						textBox1.Text,
-						(uint)numericUpDown1.Value,
-						(uint)numericUpDown2.Value
-					);
+				_result = new Job(
+					_db,
+					textBox1.Text,
+					(uint)numericUpDown1.Value,
+					(uint)numericUpDown2.Value
+				);
 			}
-			else _result.Update();
+			else
+			{
+				_result = new Job(
+					_db,
+					_result.ID,
+					textBox1.Text,
+					(uint)numericUpDown1.Value,
+					(uint)numericUpDown2.Value
+				);
+				_result.Update();
+			}
 
 			DialogResult = DialogResult.OK;
 			Close();

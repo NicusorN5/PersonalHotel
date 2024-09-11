@@ -46,7 +46,20 @@
 					tbEmail.Text
 				);
 			}
-			else _result.Update();
+			else
+			{
+				_result = new Employee(
+					_db,
+					_result.ID,
+					tbFirstName.Text,
+					tbLastName.Text,
+					monthCalendar1.SelectionStart,
+					(uint)numericUpDown1.Value,
+					tbPhone.Text,
+					tbEmail.Text
+				);
+				_result.Update();
+			}
 
 			DialogResult = DialogResult.OK;
 			Close();

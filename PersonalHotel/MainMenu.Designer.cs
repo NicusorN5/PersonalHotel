@@ -148,7 +148,9 @@
 			// employeesList
 			// 
 			employeesList.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4, columnHeader5, columnHeader6, columnHeader11, columnHeader12 });
+			employeesList.FullRowSelect = true;
 			employeesList.Location = new Point(6, 6);
+			employeesList.MultiSelect = false;
 			employeesList.Name = "employeesList";
 			employeesList.Size = new Size(774, 386);
 			employeesList.TabIndex = 0;
@@ -216,6 +218,7 @@
 			btnDeleteJob.TabIndex = 4;
 			btnDeleteJob.Text = "Delete selected job";
 			btnDeleteJob.UseVisualStyleBackColor = true;
+			btnDeleteJob.Click += btnDeleteJob_Click;
 			// 
 			// btnRefreshJobList
 			// 
@@ -250,7 +253,9 @@
 			// jobList
 			// 
 			jobList.Columns.AddRange(new ColumnHeader[] { columnHeader7, columnHeader8, columnHeader9, columnHeader10 });
+			jobList.FullRowSelect = true;
 			jobList.Location = new Point(6, 6);
+			jobList.MultiSelect = false;
 			jobList.Name = "jobList";
 			jobList.Size = new Size(775, 381);
 			jobList.TabIndex = 0;
@@ -298,6 +303,7 @@
 			btnDeleteJobEntry.TabIndex = 4;
 			btnDeleteJobEntry.Text = "Delete selected job entry";
 			btnDeleteJobEntry.UseVisualStyleBackColor = true;
+			btnDeleteJobEntry.Click += btnDeleteJobEntry_Click;
 			// 
 			// btnRefreshJobHistoryList
 			// 
@@ -332,7 +338,9 @@
 			// jobHistoryList
 			// 
 			jobHistoryList.Columns.AddRange(new ColumnHeader[] { columnHeader13, columnHeader14, columnHeader15, columnHeader16, columnHeader17 });
+			jobHistoryList.FullRowSelect = true;
 			jobHistoryList.Location = new Point(3, 3);
+			jobHistoryList.MultiSelect = false;
 			jobHistoryList.Name = "jobHistoryList";
 			jobHistoryList.Size = new Size(755, 392);
 			jobHistoryList.TabIndex = 0;

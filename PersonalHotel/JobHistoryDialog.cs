@@ -11,6 +11,27 @@
 			checkBox1_CheckedChanged(this, null);
 		}
 
+		internal JobHistoryDialog(Database db, JobEntry job) : this(db)
+		{
+			Text = "Edit job history entry";
+			_entry = job;
+
+			_employee = job.Employee;
+			textBox1.Text = _employee + "";
+
+			_job = job.Job;
+			textBox2.Text = _job + "";
+
+			monthCalendar1.SetDate(job.Start);
+
+			if (job.End.HasValue)
+			{
+				monthCalendar2.SetDate(job.End.Value);
+				monthCalendar2.Enabled = true;
+				checkBox1.Checked = true;
+			}
+		}
+
 		private void checkBox1_CheckedChanged(object sender, EventArgs e)
 		{
 			monthCalendar2.Enabled = checkBox1.Checked;
@@ -25,7 +46,7 @@
 			{
 				if (d.ShowDialog() == DialogResult.OK)
 				{
-					_employee = new Employee(_db, d.SelectedEmployeeID);
+					_employee = d.SelectedEmployee;
 					textBox1.Text = _employee.ToString();
 				}
 			}
@@ -37,7 +58,7 @@
 			{
 				if (d.ShowDialog() == DialogResult.OK)
 				{
-					_job = new Job(_db, d.SelectedJobID);
+					_job = d.SelectedJob;
 					textBox2.Text = _job.ToString();
 				}
 			}
@@ -51,7 +72,29 @@
 
 		private void button3_Click(object sender, EventArgs e)
 		{
-			_entry = new JobEntry(_db, _employee.ID, _job.ID, monthCalendar1.SelectionStart, checkBox1.Enabled ? monthCalendar2.SelectionStart : null);
+			if (_entry == null)
+			{
+				_entry = new JobEntry(
+					_db,
+					_employee,
+					_job,
+					monthCalendar1.SelectionStart,
+					checkBox1.Checked ? monthCalendar2.SelectionStart : null
+				);
+			}
+			else
+			{
+				_entry = new JobEntry(
+					_db,
+					_entry.ID,
+					_employee,
+					_job,
+					monthCalendar1.SelectionStart,
+					checkBox1.Checked ? monthCalendar2.SelectionStart : null
+				);
+				_entry.Update();
+			}
+
 			DialogResult = DialogResult.OK;
 			Close();
 		}

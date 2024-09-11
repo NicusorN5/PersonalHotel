@@ -7,8 +7,6 @@
 		public uint MinSalary { get; private set; }
 		public uint MaxSalary { get; private set; }
 
-		Database _db;
-
 		public Job(Database db, int id, string title,  uint minSalary, uint maxSalary) : base(db)
 		{
 			if (title.Length > 50) throw new ArgumentException("Title cannot be longer than 50 characters, since this is a table limitation");
@@ -36,6 +34,7 @@
 			))
 			{
 				if (r == null) throw new Exception("Job creation query failed.");
+				r.Read();
 
 				ID = r.GetInt32(0);
 
@@ -51,6 +50,7 @@
 			using (var r = db.Execute("SELECT * FROM jobs WHERE job_id = @id", new KeyValuePair("@id", id)))
 			{
 				if (r == null) throw new Exception("Job retrieval query failed");
+				r.Read();
 
 				Title = r.GetString(1);
 				MinSalary = r.GetUInt32(2);

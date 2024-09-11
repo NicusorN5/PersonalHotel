@@ -39,7 +39,9 @@
 			// 
 			jobList.Columns.AddRange(new ColumnHeader[] { columnHeader7, columnHeader8, columnHeader9, columnHeader10 });
 			jobList.Dock = DockStyle.Fill;
+			jobList.FullRowSelect = true;
 			jobList.Location = new Point(0, 0);
+			jobList.MultiSelect = false;
 			jobList.Name = "jobList";
 			jobList.Size = new Size(800, 415);
 			jobList.TabIndex = 1;

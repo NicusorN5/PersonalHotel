@@ -42,7 +42,9 @@
 			// 
 			employeesList.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4, columnHeader5, columnHeader6, columnHeader11 });
 			employeesList.Dock = DockStyle.Fill;
+			employeesList.FullRowSelect = true;
 			employeesList.Location = new Point(0, 0);
+			employeesList.MultiSelect = false;
 			employeesList.Name = "employeesList";
 			employeesList.Size = new Size(612, 411);
 			employeesList.TabIndex = 1;
